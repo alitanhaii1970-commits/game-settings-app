@@ -51,7 +51,7 @@ dependencies {
 
     // Firebase (فقط Firestore لازمه؛ خواندن لیست بازی‌ها عمومیه و نیاز به لاگین نداره)
     implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-firestore")
 
     // بارگذاری عکس از URL
     implementation("io.coil-kt:coil:2.6.0")
