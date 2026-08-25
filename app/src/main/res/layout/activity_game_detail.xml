@@ -33,25 +33,59 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="عکس بازی" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="تنظیمات پیشنهادی"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/accent" />
-
-            <TextView
-                android:id="@+id/detail_settings"
+            <!-- تنظیمات بهینه سبز -->
+            <LinearLayout
+                android:id="@+id/green_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
-                android:lineSpacingExtra="6dp"
-                android:textSize="15sp"
-                android:textColor="@color/text_primary" />
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/TagChip"
+                    android:background="@drawable/bg_tag_green"
+                    android:text="@string/green_settings"
+                    android:textColor="@color/tag_green" />
+
+                <TextView
+                    android:id="@+id/detail_settings_green"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:padding="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_primary" />
+
+            </LinearLayout>
+
+            <!-- تنظیمات بهینه زرد -->
+            <LinearLayout
+                android:id="@+id/yellow_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    style="@style/TagChip"
+                    android:background="@drawable/bg_tag_yellow"
+                    android:text="@string/yellow_settings"
+                    android:textColor="@color/tag_yellow" />
+
+                <TextView
+                    android:id="@+id/detail_settings_yellow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:padding="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_primary" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

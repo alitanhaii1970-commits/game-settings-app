@@ -1,7 +1,9 @@
 package com.gamesettings.app
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -10,6 +12,9 @@ import coil.load
 class GameDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
+        AppPreferences.applyTheme(AppPreferences.getTheme(this))
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
 
@@ -19,11 +24,15 @@ class GameDetailActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val image = findViewById<ImageView>(R.id.detail_image)
-        val settingsText = findViewById<TextView>(R.id.detail_settings)
+        val greenSection = findViewById<LinearLayout>(R.id.green_section)
+        val yellowSection = findViewById<LinearLayout>(R.id.yellow_section)
+        val greenText = findViewById<TextView>(R.id.detail_settings_green)
+        val yellowText = findViewById<TextView>(R.id.detail_settings_yellow)
 
         val name = intent.getStringExtra("name").orEmpty()
         val imageUrl = intent.getStringExtra("imageUrl").orEmpty()
-        val settings = intent.getStringExtra("settings").orEmpty()
+        val settingsGreen = intent.getStringExtra("settingsGreen").orEmpty()
+        val settingsYellow = intent.getStringExtra("settingsYellow").orEmpty()
 
         title = name
         toolbar.title = name
@@ -34,6 +43,25 @@ class GameDetailActivity : AppCompatActivity() {
             error(R.drawable.image_placeholder)
         }
 
-        settingsText.text = settings.ifBlank { "برای این بازی هنوز تنظیماتی ثبت نشده." }
+        // هر بخش فقط اگر محتوا دارد نمایش داده می‌شود
+        if (settingsGreen.isNotBlank()) {
+            greenSection.visibility = View.VISIBLE
+            greenText.text = settingsGreen
+        } else {
+            greenSection.visibility = View.GONE
+        }
+
+        if (settingsYellow.isNotBlank()) {
+            yellowSection.visibility = View.VISIBLE
+            yellowText.text = settingsYellow
+        } else {
+            yellowSection.visibility = View.GONE
+        }
+
+        // اگر هیچ‌کدام موجود نبود، پیام مناسب نشان بده
+        if (settingsGreen.isBlank() && settingsYellow.isBlank()) {
+            greenSection.visibility = View.VISIBLE
+            greenText.text = "برای این بازی هنوز تنظیماتی ثبت نشده."
+        }
     }
 }

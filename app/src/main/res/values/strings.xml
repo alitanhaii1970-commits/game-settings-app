@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">تنظیمات بازی</string>
+    <string name="app_name">PC Max</string>
+    <string name="search_hint">جستجوی بازی…</string>
+    <string name="empty_games">هنوز بازی‌ای اضافه نشده</string>
+    <string name="green_settings">تنظیمات بهینه سبز</string>
+    <string name="yellow_settings">تنظیمات بهینه زرد</string>
+    <string name="no_green_settings">تنظیمات سبز ثبت نشده</string>
+    <string name="no_yellow_settings">تنظیمات زرد ثبت نشده</string>
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_language">زبان برنامه</string>
+    <string name="settings_theme">تم برنامه</string>
+    <string name="theme_dark">تیره</string>
+    <string name="theme_light">روشن</string>
+    <string name="theme_system">پیش‌فرض سیستم</string>
+    <string name="lang_fa">فارسی</string>
+    <string name="lang_en">English</string>
+    <string name="about_title">درباره</string>
+    <string name="loading">در حال بارگذاری…</string>
+    <string name="error_loading">خطا در دریافت اطلاعات</string>
+    <string name="retry">تلاش دوباره</string>
 </resources>

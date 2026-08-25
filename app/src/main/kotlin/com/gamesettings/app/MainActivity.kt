@@ -21,10 +21,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emptyText: TextView
     private lateinit var searchBox: EditText
     private lateinit var refreshButton: ImageButton
+    private lateinit var settingsButton: ImageButton
 
     private var allGames: List<Game> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // اعمال زبان و تم ذخیره‌شده کاربر پیش از رسم صفحه
+        AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
+        AppPreferences.applyTheme(AppPreferences.getTheme(this))
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -35,12 +40,14 @@ class MainActivity : AppCompatActivity() {
         emptyText = findViewById(R.id.empty_text)
         searchBox = findViewById(R.id.search_box)
         refreshButton = findViewById(R.id.refresh_button)
+        settingsButton = findViewById(R.id.settings_button)
 
         adapter = GameAdapter { game ->
             val intent = Intent(this, GameDetailActivity::class.java)
             intent.putExtra("name", game.name)
             intent.putExtra("imageUrl", game.imageUrl)
-            intent.putExtra("settings", game.settings)
+            intent.putExtra("settingsGreen", game.settingsGreen)
+            intent.putExtra("settingsYellow", game.settingsYellow)
             startActivity(intent)
         }
 
@@ -49,6 +56,10 @@ class MainActivity : AppCompatActivity() {
 
         refreshButton.setOnClickListener {
             loadGames(forceServer = true)
+        }
+
+        settingsButton.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
 
         searchBox.addTextChangedListener(object : android.text.TextWatcher {
