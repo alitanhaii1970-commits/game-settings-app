@@ -87,6 +87,33 @@
 
             </LinearLayout>
 
+            <!-- تنظیمات فریم جنریشن -->
+            <LinearLayout
+                android:id="@+id/framegen_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    style="@style/TagChip"
+                    android:background="@drawable/bg_tag_blue"
+                    android:text="@string/frame_gen_settings"
+                    android:textColor="@color/tag_blue" />
+
+                <TextView
+                    android:id="@+id/detail_settings_framegen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:padding="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_primary" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

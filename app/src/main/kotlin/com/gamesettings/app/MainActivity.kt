@@ -3,6 +3,7 @@ package com.gamesettings.app
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         repository = GameRepository()
 
+        val rootView = findViewById<View>(android.R.id.content)
         recyclerView = findViewById(R.id.recycler_games)
         progressBar = findViewById(R.id.progress_bar)
         emptyText = findViewById(R.id.empty_text)
@@ -42,24 +44,41 @@ class MainActivity : AppCompatActivity() {
         refreshButton = findViewById(R.id.refresh_button)
         settingsButton = findViewById(R.id.settings_button)
 
+        // ظاهر شیشه‌ای (در صورت فعال بودن) روی عناصر کارت‌مانند
+        GlassStyler.applySearchBox(this, searchBox)
+        GlassStyler.applyRoundButton(this, refreshButton)
+        GlassStyler.applyRoundButton(this, settingsButton)
+
+        // انیمیشن ورود ملایم کل صفحه هنگام باز شدن
+        rootView.alpha = 0f
+        rootView.animate().alpha(1f).setDuration(260).start()
+
         adapter = GameAdapter { game ->
             val intent = Intent(this, GameDetailActivity::class.java)
             intent.putExtra("name", game.name)
             intent.putExtra("imageUrl", game.imageUrl)
             intent.putExtra("settingsGreen", game.settingsGreen)
             intent.putExtra("settingsYellow", game.settingsYellow)
+            intent.putExtra("settingsFrameGen", game.settingsFrameGen)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         refreshButton.setOnClickListener {
+            it.animate()
+                .rotationBy(360f)
+                .setDuration(450)
+                .setInterpolator(android.view.animation.DecelerateInterpolator())
+                .start()
             loadGames(forceServer = true)
         }
 
         settingsButton.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         searchBox.addTextChangedListener(object : android.text.TextWatcher {
@@ -72,6 +91,14 @@ class MainActivity : AppCompatActivity() {
 
         // اولین بار: اول از حافظه محلی (سریع)، بعد خودش سعی می‌کنه سینک کنه
         loadGames(forceServer = false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // اگر کاربر از صفحه تنظیمات برگشته و حالت شیشه‌ای را عوض کرده، ظاهر را به‌روز کن
+        GlassStyler.applySearchBox(this, searchBox)
+        GlassStyler.applyRoundButton(this, refreshButton)
+        GlassStyler.applyRoundButton(this, settingsButton)
     }
 
     private fun loadGames(forceServer: Boolean) {
@@ -107,9 +134,18 @@ class MainActivity : AppCompatActivity() {
             allGames.filter { it.name.contains(query, ignoreCase = true) }
         }
         adapter.submitList(filtered)
+        // انیمیشن ورود ردیفی برای کارت‌های بازی
+        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_games)
+        recyclerView.scheduleLayoutAnimation()
+
         emptyText.visibility = if (filtered.isEmpty() && allGames.isNotEmpty()) View.VISIBLE else View.GONE
         if (filtered.isEmpty() && allGames.isNotEmpty()) {
             emptyText.text = "بازی‌ای با این اسم پیدا نشد"
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }

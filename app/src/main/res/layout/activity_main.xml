@@ -87,7 +87,8 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingHorizontal="16dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:layoutAnimation="@anim/layout_animation_games" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

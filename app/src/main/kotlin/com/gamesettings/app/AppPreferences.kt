@@ -14,6 +14,7 @@ object AppPreferences {
     private const val PREFS_NAME = "app_prefs"
     private const val KEY_LANGUAGE = "language"
     private const val KEY_THEME = "theme"
+    private const val KEY_GLASS = "glass_effect"
 
     const val LANG_FA = "fa"
     const val LANG_EN = "en"
@@ -53,5 +54,13 @@ object AppPreferences {
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
         AppCompatDelegate.setDefaultNightMode(mode)
+    }
+
+    /** حالت شیشه‌ای (glassmorphism) — یک لایه‌ی ظاهری اضافه، مستقل از تیره/روشن بودن تم. */
+    fun getGlassEffect(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_GLASS, false)
+
+    fun setGlassEffect(context: Context, enabled: Boolean) {
+        prefs(context).edit().putBoolean(KEY_GLASS, enabled).apply()
     }
 }

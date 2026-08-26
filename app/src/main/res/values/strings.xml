@@ -5,6 +5,7 @@
     <string name="empty_games">هنوز بازی‌ای اضافه نشده</string>
     <string name="green_settings">تنظیمات بهینه سبز</string>
     <string name="yellow_settings">تنظیمات بهینه زرد</string>
+    <string name="frame_gen_settings">تنظیمات فریم جنریشن</string>
     <string name="no_green_settings">تنظیمات سبز ثبت نشده</string>
     <string name="no_yellow_settings">تنظیمات زرد ثبت نشده</string>
     <string name="settings_title">تنظیمات</string>
@@ -13,6 +14,8 @@
     <string name="theme_dark">تیره</string>
     <string name="theme_light">روشن</string>
     <string name="theme_system">پیش‌فرض سیستم</string>
+    <string name="settings_glass">حالت شیشه‌ای</string>
+    <string name="glass_effect">فعال‌سازی جلوه شیشه‌ای</string>
     <string name="lang_fa">فارسی</string>
     <string name="lang_en">English</string>
     <string name="about_title">درباره</string>

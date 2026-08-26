@@ -6,10 +6,11 @@ import com.google.firebase.firestore.PropertyName
  * مدل داده هر بازی که از Firestore خونده می‌شه.
  * اسم فیلدها باید دقیقاً با اسم فیلدهای Firestore یکی باشه.
  *
- * هر بازی دو دسته تنظیمات پیشنهادی دارد:
+ * هر بازی سه دسته تنظیمات پیشنهادی دارد:
  *  - settingsGreen: تنظیمات بهینه سبز
  *  - settingsYellow: تنظیمات بهینه زرد
- * هر دو اختیاری‌اند؛ اگر خالی باشند در جزئیات بازی نمایش داده نمی‌شوند.
+ *  - settingsFrameGen: تنظیمات فریم جنریشن
+ * هر سه اختیاری‌اند؛ اگر خالی باشند در جزئیات بازی نمایش داده نمی‌شوند.
  */
 data class Game(
     var id: String = "",
@@ -21,6 +22,8 @@ data class Game(
     var settingsGreen: String = "",
     @get:PropertyName("settingsYellow") @set:PropertyName("settingsYellow")
     var settingsYellow: String = "",
+    @get:PropertyName("settingsFrameGen") @set:PropertyName("settingsFrameGen")
+    var settingsFrameGen: String = "",
     @get:PropertyName("updatedAt") @set:PropertyName("updatedAt")
     var updatedAt: Long = 0L
 )

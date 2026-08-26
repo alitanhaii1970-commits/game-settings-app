@@ -55,6 +55,7 @@
             android:textColor="@color/text_secondary" />
 
         <LinearLayout
+            android:id="@+id/language_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -95,6 +96,7 @@
             android:textColor="@color/text_secondary" />
 
         <LinearLayout
+            android:id="@+id/theme_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -128,6 +130,45 @@
                     android:text="@string/theme_system" />
 
             </RadioGroup>
+        </LinearLayout>
+
+        <!-- حالت شیشه‌ای -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/settings_glass"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary" />
+
+        <LinearLayout
+            android:id="@+id/glass_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_card"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/glass_effect"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/glass_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/white"
+                app:trackTint="@color/accent_red" />
+
         </LinearLayout>
 
         <!-- درباره -->

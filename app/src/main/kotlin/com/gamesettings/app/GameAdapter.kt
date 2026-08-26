@@ -1,6 +1,7 @@
 package com.gamesettings.app
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,6 +22,8 @@ class GameAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_game, parent, false)
+        // ظاهر شیشه‌ای هر کارت (در صورت فعال بودن)
+        GlassStyler.applyCard(parent.context, view)
         return GameViewHolder(view, onClick)
     }
 
@@ -45,7 +48,21 @@ class GameAdapter(
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
             }
+
             itemView.setOnClickListener { onClick(game) }
+
+            // انیمیشن فشرده‌شدن ملایم کارت هنگام لمس
+            itemView.setOnTouchListener { view, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        view.animate().scaleX(0.97f).scaleY(0.97f).setDuration(120).start()
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        view.animate().scaleX(1f).scaleY(1f).setDuration(160).start()
+                    }
+                }
+                false
+            }
         }
     }
 }

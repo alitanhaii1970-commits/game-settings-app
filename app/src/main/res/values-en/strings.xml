@@ -5,6 +5,7 @@
     <string name="empty_games">No games added yet</string>
     <string name="green_settings">Green Optimal Settings</string>
     <string name="yellow_settings">Yellow Optimal Settings</string>
+    <string name="frame_gen_settings">Frame Generation Settings</string>
     <string name="no_green_settings">No green settings yet</string>
     <string name="no_yellow_settings">No yellow settings yet</string>
     <string name="settings_title">Settings</string>
@@ -13,6 +14,8 @@
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>
     <string name="theme_system">System default</string>
+    <string name="settings_glass">Glass mode</string>
+    <string name="glass_effect">Enable glass effect</string>
     <string name="lang_fa">فارسی</string>
     <string name="lang_en">English</string>
     <string name="about_title">About</string>
