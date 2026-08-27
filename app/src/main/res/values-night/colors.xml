@@ -19,9 +19,6 @@
     <color name="tag_yellow">#F5C518</color>
     <color name="tag_yellow_bg">#332B0E</color>
 
-    <color name="tag_blue">#4C9AFF</color>
-    <color name="tag_blue_bg">#122A4D</color>
-
     <!-- Glass overlay tuned for dark backgrounds -->
     <color name="glass_fill">#1FFFFFFF</color>
     <color name="glass_border">#33FFFFFF</color>

@@ -5,7 +5,6 @@
     <string name="empty_games">No games added yet</string>
     <string name="green_settings">Green Optimal Settings</string>
     <string name="yellow_settings">Yellow Optimal Settings</string>
-    <string name="frame_gen_settings">Frame Generation Settings</string>
     <string name="no_green_settings">No green settings yet</string>
     <string name="no_yellow_settings">No yellow settings yet</string>
     <string name="settings_title">Settings</string>
@@ -22,4 +21,17 @@
     <string name="loading">Loading…</string>
     <string name="error_loading">Failed to load data</string>
     <string name="retry">Retry</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_welcome_title">Welcome to PC Max</string>
+    <string name="onboard_welcome_subtitle">Optimal game settings, always at hand</string>
+    <string name="onboard_start">Get Started</string>
+    <string name="onboard_lang_title">Choose your language</string>
+    <string name="onboard_lang_subtitle">You can change this later in Settings</string>
+    <string name="onboard_theme_title">Choose your theme</string>
+    <string name="onboard_theme_subtitle">Set the app\'s look to match your taste</string>
+    <string name="onboard_glass_title">Glass Mode</string>
+    <string name="onboard_glass_subtitle">A modern, translucent look for cards and panels</string>
+    <string name="onboard_next">Next</string>
+    <string name="onboard_finish">Get Started</string>
 </resources>

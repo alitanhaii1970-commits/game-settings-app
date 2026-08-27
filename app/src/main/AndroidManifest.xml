@@ -23,6 +23,10 @@
         </activity>
 
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".GameDetailActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />

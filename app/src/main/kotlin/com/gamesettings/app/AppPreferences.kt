@@ -15,6 +15,7 @@ object AppPreferences {
     private const val KEY_LANGUAGE = "language"
     private const val KEY_THEME = "theme"
     private const val KEY_GLASS = "glass_effect"
+    private const val KEY_ONBOARDING_DONE = "onboarding_done"
 
     const val LANG_FA = "fa"
     const val LANG_EN = "en"
@@ -62,5 +63,13 @@ object AppPreferences {
 
     fun setGlassEffect(context: Context, enabled: Boolean) {
         prefs(context).edit().putBoolean(KEY_GLASS, enabled).apply()
+    }
+
+    /** آیا کاربر مراحل ورود اولیه (زبان → تم → شیشه‌ای) را قبلاً طی کرده؟ */
+    fun isOnboardingDone(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_ONBOARDING_DONE, false)
+
+    fun setOnboardingDone(context: Context) {
+        prefs(context).edit().putBoolean(KEY_ONBOARDING_DONE, true).apply()
     }
 }

@@ -27,6 +27,14 @@ class MainActivity : AppCompatActivity() {
     private var allGames: List<Game> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // بار اول: هدایت به مسیر ورود اولیه (زبان → تم → شیشه‌ای) پیش از نمایش لیست بازی‌ها
+        if (!AppPreferences.isOnboardingDone(this)) {
+            super.onCreate(savedInstanceState)
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+            return
+        }
+
         // اعمال زبان و تم ذخیره‌شده کاربر پیش از رسم صفحه
         AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
         AppPreferences.applyTheme(AppPreferences.getTheme(this))
@@ -59,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("imageUrl", game.imageUrl)
             intent.putExtra("settingsGreen", game.settingsGreen)
             intent.putExtra("settingsYellow", game.settingsYellow)
-            intent.putExtra("settingsFrameGen", game.settingsFrameGen)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }

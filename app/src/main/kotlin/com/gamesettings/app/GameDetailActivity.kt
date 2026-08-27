@@ -30,21 +30,17 @@ class GameDetailActivity : AppCompatActivity() {
         val image = findViewById<ImageView>(R.id.detail_image)
         val greenSection = findViewById<LinearLayout>(R.id.green_section)
         val yellowSection = findViewById<LinearLayout>(R.id.yellow_section)
-        val frameGenSection = findViewById<LinearLayout>(R.id.framegen_section)
         val greenText = findViewById<TextView>(R.id.detail_settings_green)
         val yellowText = findViewById<TextView>(R.id.detail_settings_yellow)
-        val frameGenText = findViewById<TextView>(R.id.detail_settings_framegen)
 
         // ظاهر شیشه‌ای روی کادرهای تنظیمات (در صورت فعال بودن)
         GlassStyler.applyCard(this, greenText)
         GlassStyler.applyCard(this, yellowText)
-        GlassStyler.applyCard(this, frameGenText)
 
         val name = intent.getStringExtra("name").orEmpty()
         val imageUrl = intent.getStringExtra("imageUrl").orEmpty()
         val settingsGreen = intent.getStringExtra("settingsGreen").orEmpty()
         val settingsYellow = intent.getStringExtra("settingsYellow").orEmpty()
-        val settingsFrameGen = intent.getStringExtra("settingsFrameGen").orEmpty()
 
         title = name
         toolbar.title = name
@@ -70,15 +66,8 @@ class GameDetailActivity : AppCompatActivity() {
             yellowSection.visibility = View.GONE
         }
 
-        if (settingsFrameGen.isNotBlank()) {
-            frameGenSection.visibility = View.VISIBLE
-            frameGenText.text = settingsFrameGen
-        } else {
-            frameGenSection.visibility = View.GONE
-        }
-
         // اگر هیچ‌کدام موجود نبود، پیام مناسب نشان بده
-        if (settingsGreen.isBlank() && settingsYellow.isBlank() && settingsFrameGen.isBlank()) {
+        if (settingsGreen.isBlank() && settingsYellow.isBlank()) {
             greenSection.visibility = View.VISIBLE
             greenText.text = "برای این بازی هنوز تنظیماتی ثبت نشده."
         }
