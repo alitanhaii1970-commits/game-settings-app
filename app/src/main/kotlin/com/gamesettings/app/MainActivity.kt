@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         searchBox.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterGames(s?.toString().orEmpty())
+                applyFilter(s?.toString().orEmpty(), animate = false)
             }
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
@@ -102,10 +102,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // اگر کاربر از صفحه تنظیمات برگشته و حالت شیشه‌ای را عوض کرده، ظاهر را به‌روز کن
+        // اگر کاربر از صفحه تنظیمات برگشته و حالت شیشه‌ای/تم را عوض کرده، ظاهر لیست را به‌روز کن
         GlassStyler.applySearchBox(this, searchBox)
         GlassStyler.applyRoundButton(this, refreshButton)
         GlassStyler.applyRoundButton(this, settingsButton)
+        if (::adapter.isInitialized) {
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private fun loadGames(forceServer: Boolean) {
@@ -117,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             onSuccess = { games ->
                 progressBar.visibility = View.GONE
                 allGames = games
-                filterGames(searchBox.text?.toString().orEmpty())
+                applyFilter(searchBox.text?.toString().orEmpty(), animate = true)
                 if (forceServer) {
                     Toast.makeText(this, "لیست به‌روز شد ✅", Toast.LENGTH_SHORT).show()
                 }
@@ -134,16 +137,23 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun filterGames(query: String) {
+    /**
+     * فیلتر لیست بر اساس جستجو و نمایش نتیجه.
+     * انیمیشن ورود ردیفی فقط زمانی اجرا می‌شود که داده‌ی تازه‌ای لود شده باشد (animate=true)،
+     * نه به‌ازای هر ضربه کیبورد در جستجو — تا تایپ کردن نرم و بدون لرزش بماند.
+     */
+    private fun applyFilter(query: String, animate: Boolean) {
         val filtered = if (query.isBlank()) {
             allGames
         } else {
             allGames.filter { it.name.contains(query, ignoreCase = true) }
         }
         adapter.submitList(filtered)
-        // انیمیشن ورود ردیفی برای کارت‌های بازی
-        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_games)
-        recyclerView.scheduleLayoutAnimation()
+
+        if (animate) {
+            recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_games)
+            recyclerView.scheduleLayoutAnimation()
+        }
 
         emptyText.visibility = if (filtered.isEmpty() && allGames.isNotEmpty()) View.VISIBLE else View.GONE
         if (filtered.isEmpty() && allGames.isNotEmpty()) {

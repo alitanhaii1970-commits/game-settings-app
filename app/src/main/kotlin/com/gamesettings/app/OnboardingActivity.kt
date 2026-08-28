@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.ViewFlipper
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 
 /**
@@ -28,6 +29,11 @@ class OnboardingActivity : AppCompatActivity() {
     private var glassEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // ظاهر خود ویزارد همیشه تیره است (صرف‌نظر از تنظیم سیستم)، چون گزینه‌ی
+        // «تیره» به‌طور پیش‌فرض در مرحله‌ی تم به‌عنوان انتخاب‌شده نشان داده می‌شود.
+        // انتخاب نهایی کاربر در finishOnboarding() به‌درستی جایگزین این حالت می‌شود.
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
@@ -146,6 +152,7 @@ class OnboardingActivity : AppCompatActivity() {
         AppPreferences.setOnboardingDone(this)
 
         startActivity(Intent(this, MainActivity::class.java))
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         finish()
     }
 }

@@ -22,8 +22,6 @@ class GameAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_game, parent, false)
-        // ظاهر شیشه‌ای هر کارت (در صورت فعال بودن)
-        GlassStyler.applyCard(parent.context, view)
         return GameViewHolder(view, onClick)
     }
 
@@ -42,6 +40,10 @@ class GameAdapter(
         private val name: TextView = itemView.findViewById(R.id.game_name)
 
         fun bind(game: Game) {
+            // ظاهر شیشه‌ای کارت — هر بار bind می‌شه دوباره چک می‌شه، پس اگر کاربر
+            // این تنظیم را در صفحه‌ی تنظیمات عوض کرده باشد، بلافاصله اعمال می‌شود
+            GlassStyler.applyCard(itemView.context, itemView)
+
             name.text = game.name
             image.load(game.imageUrl) {
                 crossfade(true)

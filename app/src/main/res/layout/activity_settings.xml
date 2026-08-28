@@ -166,8 +166,8 @@
                 android:id="@+id/glass_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:thumbTint="@color/white"
-                app:trackTint="@color/accent_red" />
+                app:thumbTint="@color/switch_thumb_tint"
+                app:trackTint="@color/switch_track_tint" />
 
         </LinearLayout>
 
