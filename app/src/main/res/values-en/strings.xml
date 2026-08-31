@@ -10,6 +10,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_language">App language</string>
     <string name="settings_theme">App theme</string>
+    <string name="settings_font">App font</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>
     <string name="theme_system">System default</string>

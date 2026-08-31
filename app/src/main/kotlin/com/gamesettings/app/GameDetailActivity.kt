@@ -19,6 +19,7 @@ class GameDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game_detail)
 
         val rootView = findViewById<View>(android.R.id.content)
+        FontManager.applyToViewTree(this, rootView)
         rootView.alpha = 0f
         rootView.animate().alpha(1f).setDuration(280).start()
 

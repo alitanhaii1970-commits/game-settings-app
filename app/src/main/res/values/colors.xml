@@ -23,6 +23,7 @@
     <color name="glass_fill">#B3FFFFFF</color>
     <color name="glass_border">#4DFFFFFF</color>
     <color name="glass_highlight">#66FFFFFF</color>
+    <color name="glass_yellow_fill">#4DF5C518</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

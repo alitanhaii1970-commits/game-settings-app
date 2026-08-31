@@ -16,6 +16,7 @@ object AppPreferences {
     private const val KEY_THEME = "theme"
     private const val KEY_GLASS = "glass_effect"
     private const val KEY_ONBOARDING_DONE = "onboarding_done"
+    private const val KEY_FONT = "app_font"
 
     const val LANG_FA = "fa"
     const val LANG_EN = "en"
@@ -71,5 +72,13 @@ object AppPreferences {
 
     fun setOnboardingDone(context: Context) {
         prefs(context).edit().putBoolean(KEY_ONBOARDING_DONE, true).apply()
+    }
+
+    /** فونت انتخابی برنامه — مقدار پیش‌فرض "system" یعنی فونت خود سیستم. */
+    fun getFontId(context: Context): String =
+        prefs(context).getString(KEY_FONT, FontManager.SYSTEM_DEFAULT) ?: FontManager.SYSTEM_DEFAULT
+
+    fun setFontId(context: Context, fontId: String) {
+        prefs(context).edit().putString(KEY_FONT, fontId).apply()
     }
 }

@@ -40,9 +40,10 @@ class GameAdapter(
         private val name: TextView = itemView.findViewById(R.id.game_name)
 
         fun bind(game: Game) {
-            // ظاهر شیشه‌ای کارت — هر بار bind می‌شه دوباره چک می‌شه، پس اگر کاربر
-            // این تنظیم را در صفحه‌ی تنظیمات عوض کرده باشد، بلافاصله اعمال می‌شود
+            // ظاهر شیشه‌ای و فونت کارت — هر بار bind می‌شه دوباره چک می‌شن، پس اگر کاربر
+            // این تنظیمات را در صفحه‌ی تنظیمات عوض کرده باشد، بلافاصله (حتی موقع اسکرول) اعمال می‌شود
             GlassStyler.applyCard(itemView.context, itemView)
+            FontManager.applyToViewTree(itemView.context, itemView)
 
             name.text = game.name
             image.load(game.imageUrl) {

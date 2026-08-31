@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         refreshButton = findViewById(R.id.refresh_button)
         settingsButton = findViewById(R.id.settings_button)
 
+        // فونت انتخابی کاربر را روی کل صفحه اعمال کن
+        FontManager.applyToViewTree(this, rootView)
+
         // ظاهر شیشه‌ای (در صورت فعال بودن) روی عناصر کارت‌مانند
         GlassStyler.applySearchBox(this, searchBox)
         GlassStyler.applyRoundButton(this, refreshButton)
@@ -102,7 +105,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // اگر کاربر از صفحه تنظیمات برگشته و حالت شیشه‌ای/تم را عوض کرده، ظاهر لیست را به‌روز کن
+        // اگر کاربر از صفحه تنظیمات برگشته و حالت شیشه‌ای/تم/فونت را عوض کرده، ظاهر لیست را به‌روز کن
+        FontManager.applyToViewTree(this, findViewById(android.R.id.content))
         GlassStyler.applySearchBox(this, searchBox)
         GlassStyler.applyRoundButton(this, refreshButton)
         GlassStyler.applyRoundButton(this, settingsButton)

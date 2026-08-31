@@ -132,6 +132,34 @@
             </RadioGroup>
         </LinearLayout>
 
+        <!-- فونت برنامه -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/settings_font"
+            android:textSize="13sp"
+            android:textColor="@color/tag_yellow" />
+
+        <LinearLayout
+            android:id="@+id/font_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_card_glass_yellow"
+            android:paddingVertical="4dp">
+
+            <RadioGroup
+                android:id="@+id/font_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
         <!-- حالت شیشه‌ای -->
         <TextView
             android:layout_width="wrap_content"
