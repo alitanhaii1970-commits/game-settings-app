@@ -1,4 +1,4 @@
-// ✅ اصلاح: GameDetailActivity.kt
+package com.gamesettings.app
 
 import android.content.Intent
 import android.net.Uri
