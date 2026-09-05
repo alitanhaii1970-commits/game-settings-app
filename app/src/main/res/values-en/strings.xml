@@ -35,6 +35,6 @@
     <string name="onboard_glass_subtitle">A modern, translucent look for cards and panels</string>
     <string name="onboard_next">Next</string>
     <string name="onboard_finish">Get Started</string>
-    <string name="youtube_hint">Tap the YouTube link to see this game's settings</string>
+    <string name="youtube_hint">Tap the YouTube link to see this game\'s settings</string>
     <string name="watch_on_youtube">Watch on YouTube</string>
 </resources>
