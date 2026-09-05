@@ -10,6 +10,10 @@ import com.google.firebase.firestore.PropertyName
  *  - settingsGreen: تنظیمات بهینه سبز
  *  - settingsYellow: تنظیمات بهینه زرد
  * هر دو اختیاری‌اند؛ اگر خالی باشند در جزئیات بازی نمایش داده نمی‌شوند.
+ *
+ * علاوه بر این، هر بازی می‌تواند به‌جای تنظیمات، یک راهنمای ویدیویی یوتیوب داشته باشد:
+ *  - youtubeUrl: لینک ویدیوی راهنما (اختیاری)
+ *  - showYoutubeButton: آیا حالت «فقط یوتیوب» برای این بازی فعال است؟
  */
 data class Game(
     var id: String = "",
@@ -21,6 +25,10 @@ data class Game(
     var settingsGreen: String = "",
     @get:PropertyName("settingsYellow") @set:PropertyName("settingsYellow")
     var settingsYellow: String = "",
+    @get:PropertyName("youtubeUrl") @set:PropertyName("youtubeUrl")
+    var youtubeUrl: String = "",
+    @get:PropertyName("showYoutubeButton") @set:PropertyName("showYoutubeButton")
+    var showYoutubeButton: Boolean = false,
     @get:PropertyName("updatedAt") @set:PropertyName("updatedAt")
     var updatedAt: Long = 0L
 )

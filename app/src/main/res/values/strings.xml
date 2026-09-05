@@ -35,4 +35,6 @@
     <string name="onboard_glass_subtitle">یک ظاهر مدرن و نیمه‌شفاف برای کارت‌ها و کادرها</string>
     <string name="onboard_next">بعدی</string>
     <string name="onboard_finish">شروع کنید</string>
+    <string name="youtube_hint">برای دیدن تنظیمات این بازی روی لینک یوتیوب کلیک کنید</string>
+    <string name="watch_on_youtube">مشاهده در یوتیوب</string>
 </resources>

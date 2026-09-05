@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("imageUrl", game.imageUrl)
             intent.putExtra("settingsGreen", game.settingsGreen)
             intent.putExtra("settingsYellow", game.settingsYellow)
+            intent.putExtra("youtubeUrl", game.youtubeUrl)
+            intent.putExtra("showYoutubeButton", game.showYoutubeButton)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }

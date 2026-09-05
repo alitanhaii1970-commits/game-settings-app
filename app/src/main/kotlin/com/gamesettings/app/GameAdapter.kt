@@ -40,6 +40,13 @@ class GameAdapter(
         private val name: TextView = itemView.findViewById(R.id.game_name)
 
         fun bind(game: Game) {
+            // مهم: هر انیمیشن نیمه‌کاره‌ی قبلی را لغو و شفافیت/اندازه‌ی کارت را کامل می‌کنیم
+            itemView.clearAnimation()
+            itemView.animate().cancel()
+            itemView.alpha = 1f
+            itemView.scaleX = 1f
+            itemView.scaleY = 1f
+
             // ظاهر شیشه‌ای و فونت کارت — هر بار bind می‌شه دوباره چک می‌شن، پس اگر کاربر
             // این تنظیمات را در صفحه‌ی تنظیمات عوض کرده باشد، بلافاصله (حتی موقع اسکرول) اعمال می‌شود
             GlassStyler.applyCard(itemView.context, itemView)
