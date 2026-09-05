@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Enhanced White Theme Colors -->
+    
+    <!-- Primary backgrounds -->
+    <color name="white_bg_primary">#FAFAFA</color>
+    <color name="white_bg_secondary">#F5F5F5</color>
+    <color name="white_surface">#FFFFFF</color>
+    
+    <!-- Text colors (high contrast) -->
+    <color name="white_text_primary">#0A0A0A</color>
+    <color name="white_text_secondary">#424242</color>
+    <color name="white_text_tertiary">#757575</color>
+    
+    <!-- Glass layers (white theme) -->
+    <color name="white_glass_fill">#E6FFFFFF</color>
+    <color name="white_glass_border">#1FFFFFFF</color>
+    <color name="white_glass_highlight">#B3FFFFFF</color>
+    
+    <!-- Accent colors -->
+    <color name="white_accent_red">#DC143C</color>
+    <color name="white_accent_green">#2E7D32</color>
+    <color name="white_accent_yellow">#FBC02D</color>
+    
+    <!-- Shadows (subtle on white) -->
+    <color name="white_shadow_light">#08000000</color>
+    <color name="white_shadow_medium">#14000000</color>
+    <color name="white_shadow_dark">#1F000000</color>
+    
+    <!-- Dividers and borders -->
+    <color name="white_divider">#12000000</color>
+    <color name="white_border">#1A000000</color>
+</resources>
