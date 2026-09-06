@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingsButton: ImageButton
 
     private var allGames: List<Game> = emptyList()
+    private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // بار اول: هدایت به مسیر ورود اولیه (زبان → تم → شیشه‌ای) پیش از نمایش لیست بازی‌ها
@@ -80,9 +81,11 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         refreshButton.setOnClickListener {
+            if (isLoading) return@setOnClickListener // از چند درخواست هم‌زمان جلوگیری می‌کنه
+
             it.animate()
                 .rotationBy(360f)
-                .setDuration(450)
+                .setDuration(500)
                 .setInterpolator(android.view.animation.DecelerateInterpolator())
                 .start()
             loadGames(forceServer = true)
@@ -118,12 +121,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadGames(forceServer: Boolean) {
+        isLoading = true
+        refreshButton.animate().alpha(0.4f).setDuration(150).start()
         progressBar.visibility = View.VISIBLE
         emptyText.visibility = View.GONE
 
         repository.fetchGames(
             forceServer = forceServer,
             onSuccess = { games ->
+                isLoading = false
+                refreshButton.animate().alpha(1f).setDuration(200).start()
                 progressBar.visibility = View.GONE
                 allGames = games
                 applyFilter(searchBox.text?.toString().orEmpty(), animate = true)
@@ -132,6 +139,8 @@ class MainActivity : AppCompatActivity() {
                 }
             },
             onError = { e ->
+                isLoading = false
+                refreshButton.animate().alpha(1f).setDuration(200).start()
                 progressBar.visibility = View.GONE
                 if (allGames.isEmpty()) {
                     emptyText.visibility = View.VISIBLE
