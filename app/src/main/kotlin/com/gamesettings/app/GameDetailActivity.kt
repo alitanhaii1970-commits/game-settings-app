@@ -30,6 +30,8 @@ class GameDetailActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.detail_toolbar)
         setSupportActionBar(toolbar)
+        // آیکون برگشت رنگ ثابت داشت که توی تم روشن دیده نمی‌شد؛ الان با رنگ متن اصلی هماهنگ می‌شه
+        toolbar.navigationIcon?.setTint(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
@@ -132,6 +134,23 @@ class GameDetailActivity : AppCompatActivity() {
                 greenText.text = "برای این بازی هنوز تنظیماتی ثبت نشده."
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: android.view.Menu): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        menu.findItem(R.id.action_faq)?.icon?.setTint(
+            androidx.core.content.ContextCompat.getColor(this, R.color.text_primary)
+        )
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        if (item.itemId == R.id.action_faq) {
+            startActivity(Intent(this, FaqActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun finish() {

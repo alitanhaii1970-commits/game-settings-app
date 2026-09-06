@@ -37,4 +37,15 @@
     <string name="onboard_finish">Get Started</string>
     <string name="youtube_hint">Tap the YouTube link to see this game\'s settings</string>
     <string name="watch_on_youtube">Watch on YouTube</string>
+    <string name="faq_title">FAQ</string>
+    <string name="faq_q1">Do these settings strain or damage my system?</string>
+    <string name="faq_a1">Not at all. These are just in-game settings suggestions (graphics quality, resolution, effects). Nothing changes on your phone\'s system files or hardware — it\'s completely safe.</string>
+    <string name="faq_q2">What\'s the difference between green and yellow settings?</string>
+    <string name="faq_a2">Green means the best FPS and smoothest performance (lower graphics quality). Yellow means the best visual quality (better for stronger phones, may give lower FPS).</string>
+    <string name="faq_q3">What\'s the YouTube link and how do I use it?</string>
+    <string name="faq_a3">Some games have a guide video instead of text settings. Just tap "Watch on YouTube" to open the YouTube app or your browser and watch it.</string>
+    <string name="faq_q4">How do I change the app\'s theme?</string>
+    <string name="faq_a4">Go to Settings (gear icon on the home screen) → Theme → choose Light or Dark.</string>
+    <string name="faq_q5">How do I change the app\'s font?</string>
+    <string name="faq_a5">Go to Settings → Font → choose one of the options (Vazirmatn, Sahel, Montserrat, Inter, or System Default).</string>
 </resources>

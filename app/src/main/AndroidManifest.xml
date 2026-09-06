@@ -45,6 +45,11 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ImagePreview" />
+        <activity
+            android:name=".FaqActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".GameDetailActivity" />
     </application>
 
 </manifest>
