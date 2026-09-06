@@ -12,7 +12,8 @@ android {
         applicationId = "com.gamesettings.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
+        // در بیلد لوکال = 1؛ در GitHub Actions به شماره‌ی اجرا ست می‌شه تا نصب آپدیت روی نسخه‌ی قبلی جواب بده
+        versionCode = (System.getenv("BUILD_NUMBER")?.toIntOrNull()) ?: 1
         versionName = "1.0"
     }
 
