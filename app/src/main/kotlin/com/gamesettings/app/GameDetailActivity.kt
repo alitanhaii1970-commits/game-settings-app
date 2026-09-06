@@ -63,7 +63,19 @@ class GameDetailActivity : AppCompatActivity() {
             error(R.drawable.image_placeholder)
         }
 
-        // لمس عکس → پیش‌نمایش تمام‌صفحه
+        // لمس عکس → پیش‌نمایش تمام‌صفحه (با فیدبک لمسی ملایم روی خود عکس)
+        imageTapArea.setOnTouchListener { _, event ->
+            when (event.action) {
+                android.view.MotionEvent.ACTION_DOWN ->
+                    image.animate().scaleX(0.98f).scaleY(0.98f).setDuration(100).start()
+                android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL ->
+                    image.animate().scaleX(1f).scaleY(1f)
+                        .setDuration(200)
+                        .setInterpolator(android.view.animation.OvershootInterpolator(1.5f))
+                        .start()
+            }
+            false
+        }
         imageTapArea.setOnClickListener {
             val intent = Intent(this, ImagePreviewActivity::class.java)
             intent.putExtra("imageUrl", imageUrl)

@@ -61,14 +61,25 @@ class GameAdapter(
 
             itemView.setOnClickListener { onClick(game) }
 
-            // انیمیشن فشرده‌شدن ملایم کارت هنگام لمس
+            // انیمیشن فشرده‌شدن کارت هنگام لمس — کمی مقیاس کوچک‌تر + کاهش برجستگی هنگام فشار،
+            // و برگشت با overshoot ملایم (حس فنری و premium) هنگام رهاسازی
             itemView.setOnTouchListener { view, event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        view.animate().scaleX(0.97f).scaleY(0.97f).setDuration(120).start()
+                        view.animate()
+                            .scaleX(0.96f).scaleY(0.96f)
+                            .translationZ(-2f)
+                            .setDuration(110)
+                            .setInterpolator(android.view.animation.DecelerateInterpolator())
+                            .start()
                     }
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        view.animate().scaleX(1f).scaleY(1f).setDuration(160).start()
+                        view.animate()
+                            .scaleX(1f).scaleY(1f)
+                            .translationZ(0f)
+                            .setDuration(220)
+                            .setInterpolator(android.view.animation.OvershootInterpolator(1.8f))
+                            .start()
                     }
                 }
                 false
