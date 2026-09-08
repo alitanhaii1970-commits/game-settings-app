@@ -136,23 +136,6 @@ class GameDetailActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: android.view.Menu): Boolean {
-        menuInflater.inflate(R.menu.detail_menu, menu)
-        menu.findItem(R.id.action_faq)?.icon?.setTint(
-            androidx.core.content.ContextCompat.getColor(this, R.color.text_primary)
-        )
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
-        if (item.itemId == R.id.action_faq) {
-            startActivity(Intent(this, FaqActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
