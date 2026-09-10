@@ -14,7 +14,7 @@ android {
         targetSdk = 34
         // در بیلد لوکال = 1؛ در GitHub Actions به شماره‌ی اجرا ست می‌شه تا نصب آپدیت روی نسخه‌ی قبلی جواب بده
         versionCode = (System.getenv("BUILD_NUMBER")?.toIntOrNull()) ?: 1
-        versionName = "1.0"
+        versionName = "1.0.${System.getenv("BUILD_NUMBER") ?: "0"}"
     }
 
     buildTypes {

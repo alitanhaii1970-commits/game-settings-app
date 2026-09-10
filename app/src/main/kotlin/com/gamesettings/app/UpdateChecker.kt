@@ -61,7 +61,8 @@ object UpdateChecker {
                 val body = connection.inputStream.bufferedReader().use { it.readText() }
                 val json = JSONObject(body)
                 val name = json.optString("name", "")
-                val remoteBuild = Regex("Build\\s*(\\d+)").find(name)
+                // فرمت اسم release الان "v1.0.N" هست (N = شماره‌ی build)
+                val remoteBuild = Regex("v1\\.0\\.(\\d+)").find(name)
                     ?.groupValues?.get(1)?.toIntOrNull() ?: 0
 
                 var downloadUrl = ""

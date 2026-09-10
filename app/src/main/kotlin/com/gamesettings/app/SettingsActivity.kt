@@ -98,7 +98,7 @@ class SettingsActivity : AppCompatActivity() {
         // ==================== بررسی و دانلود خودکار آپدیت ====================
         val versionText: android.widget.TextView = findViewById(R.id.version_text)
         val checkUpdateButton: android.widget.Button = findViewById(R.id.check_update_button)
-        versionText.text = getString(R.string.version_label, BuildConfig.VERSION_CODE)
+        versionText.text = getString(R.string.version_label, BuildConfig.VERSION_NAME)
 
         checkUpdateButton.setOnClickListener {
             checkUpdateButton.isEnabled = false

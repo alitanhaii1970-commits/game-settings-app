@@ -42,5 +42,5 @@
     <string name="up_to_date">شما به‌روز هستید ✅</string>
     <string name="update_available">نسخه‌ی جدید پیدا شد، در حال دانلود…</string>
     <string name="update_check_failed">بررسی آپدیت ناموفق بود</string>
-    <string name="version_label">نسخه‌ی فعلی: %1$d</string>
+    <string name="version_label">نسخه‌ی فعلی: %1$s</string>
 </resources>
