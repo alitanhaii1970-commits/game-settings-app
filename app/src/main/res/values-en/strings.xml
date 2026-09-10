@@ -37,4 +37,10 @@
     <string name="onboard_finish">Get Started</string>
     <string name="youtube_hint">Tap the YouTube link to see this game\'s settings</string>
     <string name="watch_on_youtube">Watch on YouTube</string>
+    <string name="check_for_update">Check for Update</string>
+    <string name="checking_for_update">Checking…</string>
+    <string name="up_to_date">You\'re up to date ✅</string>
+    <string name="update_available">New version found, downloading…</string>
+    <string name="update_check_failed">Update check failed</string>
+    <string name="version_label">Current version: %1$d</string>
 </resources>

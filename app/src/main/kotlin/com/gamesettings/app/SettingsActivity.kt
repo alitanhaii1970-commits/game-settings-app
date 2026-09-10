@@ -94,6 +94,40 @@ class SettingsActivity : AppCompatActivity() {
             GlassStyler.applyCard(this, themeCard)
             GlassStyler.applyCard(this, glassCard)
         }
+
+        // ==================== بررسی و دانلود خودکار آپدیت ====================
+        val versionText: android.widget.TextView = findViewById(R.id.version_text)
+        val checkUpdateButton: android.widget.Button = findViewById(R.id.check_update_button)
+        versionText.text = getString(R.string.version_label, BuildConfig.VERSION_CODE)
+
+        checkUpdateButton.setOnClickListener {
+            checkUpdateButton.isEnabled = false
+            checkUpdateButton.text = getString(R.string.checking_for_update)
+
+            UpdateChecker.check(
+                onUpdateAvailable = { info ->
+                    checkUpdateButton.text = getString(R.string.update_available)
+                    UpdateChecker.downloadAndPromptInstall(this, info.downloadUrl)
+                    checkUpdateButton.isEnabled = true
+                },
+                onUpToDate = {
+                    checkUpdateButton.text = getString(R.string.up_to_date)
+                    checkUpdateButton.isEnabled = true
+                    checkUpdateButton.postDelayed({
+                        checkUpdateButton.text = getString(R.string.check_for_update)
+                    }, 2500)
+                },
+                onError = { message ->
+                    android.widget.Toast.makeText(
+                        this,
+                        getString(R.string.update_check_failed) + ": $message",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                    checkUpdateButton.text = getString(R.string.check_for_update)
+                    checkUpdateButton.isEnabled = true
+                }
+            )
+        }
     }
 
     /** ردیف‌های رادیویی انتخاب فونت را بر اساس لیست FontManager.OPTIONS به‌صورت پویا می‌سازد. */

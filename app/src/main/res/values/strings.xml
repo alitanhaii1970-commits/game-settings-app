@@ -37,4 +37,10 @@
     <string name="onboard_finish">شروع کنید</string>
     <string name="youtube_hint">برای دیدن تنظیمات این بازی روی لینک یوتیوب کلیک کنید</string>
     <string name="watch_on_youtube">مشاهده در یوتیوب</string>
+    <string name="check_for_update">بررسی آپدیت</string>
+    <string name="checking_for_update">در حال بررسی…</string>
+    <string name="up_to_date">شما به‌روز هستید ✅</string>
+    <string name="update_available">نسخه‌ی جدید پیدا شد، در حال دانلود…</string>
+    <string name="update_check_failed">بررسی آپدیت ناموفق بود</string>
+    <string name="version_label">نسخه‌ی فعلی: %1$d</string>
 </resources>

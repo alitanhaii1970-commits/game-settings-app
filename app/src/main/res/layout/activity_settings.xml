@@ -224,6 +224,29 @@
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
 
+            <TextView
+                android:id="@+id/version_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+            <Button
+                android:id="@+id/check_update_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/bg_round_button_glass"
+                android:text="@string/check_for_update"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="@color/text_primary"
+                android:elevation="0dp"
+                android:stateListAnimator="@null" />
+
         </LinearLayout>
 
     </LinearLayout>
