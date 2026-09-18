@@ -17,6 +17,7 @@ object AppPreferences {
     private const val KEY_GLASS = "glass_effect"
     private const val KEY_ONBOARDING_DONE = "onboarding_done"
     private const val KEY_FONT = "app_font"
+    private const val KEY_SYSTEM_TIER = "system_tier"
 
     const val LANG_FA = "fa"
     const val LANG_EN = "en"
@@ -24,6 +25,10 @@ object AppPreferences {
     const val THEME_DARK = "dark"
     const val THEME_LIGHT = "light"
     const val THEME_SYSTEM = "system"
+
+    const val TIER_WEAK = "weak"
+    const val TIER_MEDIUM = "medium"
+    const val TIER_STRONG = "strong"
 
     private fun prefs(context: Context): SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -80,5 +85,18 @@ object AppPreferences {
 
     fun setFontId(context: Context, fontId: String) {
         prefs(context).edit().putString(KEY_FONT, fontId).apply()
+    }
+
+    /**
+     * قدرت سیستمِ (کامپیوتر) کاربر — نه گوشی. کاربر یک‌بار در تنظیمات انتخاب می‌کند
+     * و برنامه بر همین اساس، در صفحه‌ی هر بازی، بخش سبز یا زرد را به‌عنوان
+     * «توصیه‌شده برای سیستم شما» علامت می‌زند. مقدار خالی یعنی هنوز انتخاب نکرده،
+     * که در این حالت هیچ توصیه‌ای نمایش داده نمی‌شود.
+     */
+    fun getSystemTier(context: Context): String =
+        prefs(context).getString(KEY_SYSTEM_TIER, "") ?: ""
+
+    fun setSystemTier(context: Context, tier: String) {
+        prefs(context).edit().putString(KEY_SYSTEM_TIER, tier).apply()
     }
 }

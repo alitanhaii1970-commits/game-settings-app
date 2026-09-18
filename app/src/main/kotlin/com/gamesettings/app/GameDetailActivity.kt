@@ -42,6 +42,8 @@ class GameDetailActivity : AppCompatActivity() {
         val yellowSection = findViewById<LinearLayout>(R.id.yellow_section)
         val greenText = findViewById<TextView>(R.id.detail_settings_green)
         val yellowText = findViewById<TextView>(R.id.detail_settings_yellow)
+        val greenBadge = findViewById<TextView>(R.id.green_recommended_badge)
+        val yellowBadge = findViewById<TextView>(R.id.yellow_recommended_badge)
         val watchButton = findViewById<Button>(R.id.watch_youtube_button)
 
         // ✅ اصلاح: دریافت فیلدهای Intent درست
@@ -132,6 +134,17 @@ class GameDetailActivity : AppCompatActivity() {
             if (settingsGreen.isBlank() && settingsYellow.isBlank()) {
                 greenSection.visibility = View.VISIBLE
                 greenText.text = "برای این بازی هنوز تنظیماتی ثبت نشده."
+            }
+
+            // نشان «توصیه‌شده برای سیستم شما» — فقط اگر کاربر قبلاً قدرت سیستمش رو
+            // در تنظیمات انتخاب کرده باشه، و فقط روی بخشی که واقعاً محتوا داره
+            val systemTier = AppPreferences.getSystemTier(this)
+            if (systemTier.isNotBlank()) {
+                val recommendGreen = systemTier != AppPreferences.TIER_STRONG
+                greenBadge.visibility =
+                    if (recommendGreen && greenSection.visibility == View.VISIBLE) View.VISIBLE else View.GONE
+                yellowBadge.visibility =
+                    if (!recommendGreen && yellowSection.visibility == View.VISIBLE) View.VISIBLE else View.GONE
             }
         }
     }

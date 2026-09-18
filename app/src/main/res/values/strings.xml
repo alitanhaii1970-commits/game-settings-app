@@ -43,4 +43,9 @@
     <string name="update_available">نسخه‌ی جدید پیدا شد، در حال دانلود…</string>
     <string name="update_check_failed">بررسی آپدیت ناموفق بود</string>
     <string name="version_label">نسخه‌ی فعلی: %1$s</string>
+    <string name="settings_system_power">قدرت سیستم شما (کامپیوتر)</string>
+    <string name="system_tier_weak">ضعیف</string>
+    <string name="system_tier_medium">متوسط</string>
+    <string name="system_tier_strong">قوی</string>
+    <string name="recommended_for_you">✅ توصیه‌شده برای سیستم شما</string>
 </resources>

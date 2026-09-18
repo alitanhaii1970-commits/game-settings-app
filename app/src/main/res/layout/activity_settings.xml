@@ -132,6 +132,54 @@
             </RadioGroup>
         </LinearLayout>
 
+        <!-- قدرت سیستم (کامپیوتر) کاربر -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/settings_system_power"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary" />
+
+        <LinearLayout
+            android:id="@+id/system_tier_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_card"
+            android:paddingVertical="4dp">
+
+            <RadioGroup
+                android:id="@+id/system_tier_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/tier_weak"
+                    style="@style/SettingsRadio"
+                    android:text="@string/system_tier_weak" />
+
+                <View style="@style/SettingsDivider" />
+
+                <RadioButton
+                    android:id="@+id/tier_medium"
+                    style="@style/SettingsRadio"
+                    android:text="@string/system_tier_medium" />
+
+                <View style="@style/SettingsDivider" />
+
+                <RadioButton
+                    android:id="@+id/tier_strong"
+                    style="@style/SettingsRadio"
+                    android:text="@string/system_tier_strong" />
+
+            </RadioGroup>
+        </LinearLayout>
+
         <!-- فونت برنامه -->
         <TextView
             android:layout_width="wrap_content"

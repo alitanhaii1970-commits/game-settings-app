@@ -22,16 +22,19 @@ class SettingsActivity : AppCompatActivity() {
         val backButton: ImageButton = findViewById(R.id.back_button)
         val languageGroup: RadioGroup = findViewById(R.id.language_group)
         val themeGroup: RadioGroup = findViewById(R.id.theme_group)
+        val systemTierGroup: RadioGroup = findViewById(R.id.system_tier_group)
         val fontGroup: RadioGroup = findViewById(R.id.font_group)
         val glassSwitch: SwitchCompat = findViewById(R.id.glass_switch)
         val languageCard: LinearLayout = findViewById(R.id.language_card)
         val themeCard: LinearLayout = findViewById(R.id.theme_card)
+        val systemTierCard: LinearLayout = findViewById(R.id.system_tier_card)
         val glassCard: LinearLayout = findViewById(R.id.glass_card)
 
         // ظاهر شیشه‌ای روی کارت‌های همین صفحه (در صورت فعال بودن)؛
         // کارت فونت همیشه استایل زرد-شیشه‌ای مخصوص خودش را دارد (در XML ست شده)
         GlassStyler.applyCard(this, languageCard)
         GlassStyler.applyCard(this, themeCard)
+        GlassStyler.applyCard(this, systemTierCard)
         GlassStyler.applyCard(this, glassCard)
 
         // فونت انتخابی فعلی را روی همین صفحه هم اعمال کن
@@ -51,6 +54,12 @@ class SettingsActivity : AppCompatActivity() {
             AppPreferences.THEME_LIGHT -> themeGroup.check(R.id.theme_light)
             AppPreferences.THEME_SYSTEM -> themeGroup.check(R.id.theme_system)
             else -> themeGroup.check(R.id.theme_dark)
+        }
+        when (AppPreferences.getSystemTier(this)) {
+            AppPreferences.TIER_MEDIUM -> systemTierGroup.check(R.id.tier_medium)
+            AppPreferences.TIER_STRONG -> systemTierGroup.check(R.id.tier_strong)
+            AppPreferences.TIER_WEAK -> systemTierGroup.check(R.id.tier_weak)
+            else -> systemTierGroup.clearCheck() // هنوز انتخاب نکرده — هیچ‌کدام تیک نخورده
         }
         glassSwitch.isChecked = AppPreferences.getGlassEffect(this)
 
@@ -79,6 +88,15 @@ class SettingsActivity : AppCompatActivity() {
                 else -> AppPreferences.THEME_DARK
             }
             AppPreferences.setTheme(this, theme)
+        }
+
+        systemTierGroup.setOnCheckedChangeListener { _, checkedId ->
+            val tier = when (checkedId) {
+                R.id.tier_medium -> AppPreferences.TIER_MEDIUM
+                R.id.tier_strong -> AppPreferences.TIER_STRONG
+                else -> AppPreferences.TIER_WEAK
+            }
+            AppPreferences.setSystemTier(this, tier)
         }
 
         fontGroup.setOnCheckedChangeListener { group, checkedId ->

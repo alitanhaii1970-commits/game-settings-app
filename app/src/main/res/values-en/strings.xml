@@ -43,4 +43,9 @@
     <string name="update_available">New version found, downloading…</string>
     <string name="update_check_failed">Update check failed</string>
     <string name="version_label">Current version: %1$s</string>
+    <string name="settings_system_power">Your System Power (PC)</string>
+    <string name="system_tier_weak">Weak</string>
+    <string name="system_tier_medium">Medium</string>
+    <string name="system_tier_strong">Strong</string>
+    <string name="recommended_for_you">✅ Recommended for your system</string>
 </resources>
