@@ -243,7 +243,146 @@
 
         </LinearLayout>
 
-        <!-- ═══ صفحه ۴: حالت شیشه‌ای ═══ -->
+        <!-- ═══ صفحه ۴: قدرت سیستم (کامپیوتر) ═══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="28dp"
+            android:paddingTop="56dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/onboard_tier_title"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="28dp"
+                android:text="@string/onboard_tier_subtitle"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:id="@+id/option_tier_weak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_selectable_card"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <View
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_tier_preview_weak" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/system_tier_weak"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <ImageView
+                    android:id="@+id/check_tier_weak"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_check"
+                    android:visibility="invisible"
+                    app:tint="@color/accent_red" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/option_tier_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_selectable_card"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <View
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_tier_preview_medium" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/system_tier_medium"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <ImageView
+                    android:id="@+id/check_tier_medium"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_check"
+                    android:visibility="invisible"
+                    app:tint="@color/accent_red" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/option_tier_strong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_selectable_card"
+                android:padding="14dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <View
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_tier_preview_strong" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/system_tier_strong"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <ImageView
+                    android:id="@+id/check_tier_strong"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_check"
+                    android:visibility="invisible"
+                    app:tint="@color/accent_red" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- ═══ صفحه ۵: حالت شیشه‌ای ═══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -345,6 +484,13 @@
 
         <View
             android:id="@+id/dot_3"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/dot_inactive" />
+
+        <View
+            android:id="@+id/dot_4"
             android:layout_width="8dp"
             android:layout_height="8dp"
             android:layout_marginStart="6dp"

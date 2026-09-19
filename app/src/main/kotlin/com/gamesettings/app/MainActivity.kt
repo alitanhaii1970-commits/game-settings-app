@@ -104,8 +104,13 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
 
-        // اولین بار: اول از حافظه محلی (سریع)، بعد خودش سعی می‌کنه سینک کنه
-        loadGames(forceServer = false)
+        // فقط اولین‌بارِ واقعی (بعد از اولین نصب/onboarding) خودکار از سرور می‌خونه.
+        // دفعات بعدی، فقط از حافظه‌ی محلی نشون می‌ده — تا خودش بخواد، دکمه‌ی رفرش رو بزنه.
+        if (AppPreferences.hasEverLoadedGames(this)) {
+            loadGames(forceServer = false, cacheOnly = true)
+        } else {
+            loadGames(forceServer = true)
+        }
     }
 
     override fun onResume() {
@@ -120,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadGames(forceServer: Boolean) {
+    private fun loadGames(forceServer: Boolean, cacheOnly: Boolean = false) {
         isLoading = true
         refreshButton.animate().alpha(0.4f).setDuration(150).start()
         progressBar.visibility = View.VISIBLE
@@ -128,6 +133,7 @@ class MainActivity : AppCompatActivity() {
 
         repository.fetchGames(
             forceServer = forceServer,
+            cacheOnly = cacheOnly,
             onSuccess = { games ->
                 isLoading = false
                 refreshButton.animate().alpha(1f).setDuration(200).start()
@@ -135,6 +141,7 @@ class MainActivity : AppCompatActivity() {
                 allGames = games
                 applyFilter(searchBox.text?.toString().orEmpty(), animate = true)
                 if (forceServer) {
+                    AppPreferences.markGamesLoaded(this)
                     Toast.makeText(this, "لیست به‌روز شد ✅", Toast.LENGTH_SHORT).show()
                 }
             },
@@ -142,6 +149,11 @@ class MainActivity : AppCompatActivity() {
                 isLoading = false
                 refreshButton.animate().alpha(1f).setDuration(200).start()
                 progressBar.visibility = View.GONE
+                if (cacheOnly) {
+                    // حافظه‌ی محلی خالی بود (مثلاً حذف داده‌های اپ) — یک‌بار از سرور تلاش کن
+                    loadGames(forceServer = true)
+                    return@fetchGames
+                }
                 if (allGames.isEmpty()) {
                     emptyText.visibility = View.VISIBLE
                     emptyText.text = "اتصال به اینترنت برقرار نیست.\nلیست قبلی موجود نیست."

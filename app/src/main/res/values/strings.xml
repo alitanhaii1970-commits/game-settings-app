@@ -47,5 +47,6 @@
     <string name="system_tier_weak">ضعیف</string>
     <string name="system_tier_medium">متوسط</string>
     <string name="system_tier_strong">قوی</string>
-    <string name="recommended_for_you">✅ توصیه‌شده برای سیستم شما</string>
+    <string name="onboard_tier_title">قدرت سیستم شما (کامپیوتر) چطوره؟</string>
+    <string name="onboard_tier_subtitle">بر این اساس، توی هر بازی بهت نشون می‌دیم کدوم تنظیمات مناسب‌تره</string>
 </resources>

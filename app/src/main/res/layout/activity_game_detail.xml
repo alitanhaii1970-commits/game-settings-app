@@ -126,29 +126,11 @@
                         android:orientation="vertical"
                         android:layout_marginTop="20dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                style="@style/TagChip"
-                                android:background="@drawable/bg_tag_green"
-                                android:text="@string/green_settings"
-                                android:textColor="@color/tag_green" />
-
-                            <TextView
-                                android:id="@+id/green_recommended_badge"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:visibility="gone"
-                                android:text="@string/recommended_for_you"
-                                android:textSize="11sp"
-                                android:textColor="@color/tag_green" />
-
-                        </LinearLayout>
+                        <TextView
+                            style="@style/TagChip"
+                            android:background="@drawable/bg_tag_green"
+                            android:text="@string/green_settings"
+                            android:textColor="@color/tag_green" />
 
                         <TextView
                             android:id="@+id/detail_settings_green"
@@ -171,29 +153,11 @@
                         android:orientation="vertical"
                         android:layout_marginTop="16dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                style="@style/TagChip"
-                                android:background="@drawable/bg_tag_yellow"
-                                android:text="@string/yellow_settings"
-                                android:textColor="@color/tag_yellow" />
-
-                            <TextView
-                                android:id="@+id/yellow_recommended_badge"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:visibility="gone"
-                                android:text="@string/recommended_for_you"
-                                android:textSize="11sp"
-                                android:textColor="@color/tag_yellow" />
-
-                        </LinearLayout>
+                        <TextView
+                            style="@style/TagChip"
+                            android:background="@drawable/bg_tag_yellow"
+                            android:text="@string/yellow_settings"
+                            android:textColor="@color/tag_yellow" />
 
                         <TextView
                             android:id="@+id/detail_settings_yellow"

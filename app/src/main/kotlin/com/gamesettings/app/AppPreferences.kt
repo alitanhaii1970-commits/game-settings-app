@@ -18,6 +18,7 @@ object AppPreferences {
     private const val KEY_ONBOARDING_DONE = "onboarding_done"
     private const val KEY_FONT = "app_font"
     private const val KEY_SYSTEM_TIER = "system_tier"
+    private const val KEY_HAS_LOADED_GAMES = "has_loaded_games"
 
     const val LANG_FA = "fa"
     const val LANG_EN = "en"
@@ -98,5 +99,17 @@ object AppPreferences {
 
     fun setSystemTier(context: Context, tier: String) {
         prefs(context).edit().putString(KEY_SYSTEM_TIER, tier).apply()
+    }
+
+    /**
+     * آیا لیست بازی‌ها حداقل یک‌بار با موفقیت از سرور گرفته شده؟ فقط وقتی
+     * true می‌شه که یک fetch از سرور واقعاً موفق باشه (نه صرفاً تلاش بشه) —
+     * تا اگه اولین‌بار اینترنت نبود، دفعه‌ی بعد دوباره تلاش خودکار بشه.
+     */
+    fun hasEverLoadedGames(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_HAS_LOADED_GAMES, false)
+
+    fun markGamesLoaded(context: Context) {
+        prefs(context).edit().putBoolean(KEY_HAS_LOADED_GAMES, true).apply()
     }
 }

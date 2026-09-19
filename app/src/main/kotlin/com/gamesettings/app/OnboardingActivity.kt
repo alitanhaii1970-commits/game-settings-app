@@ -26,6 +26,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private var selectedLang: String = AppPreferences.LANG_FA
     private var selectedTheme: String = AppPreferences.THEME_DARK
+    private var selectedTier: String = AppPreferences.TIER_MEDIUM
     private var glassEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +44,13 @@ class OnboardingActivity : AppCompatActivity() {
             findViewById(R.id.dot_0),
             findViewById(R.id.dot_1),
             findViewById(R.id.dot_2),
-            findViewById(R.id.dot_3)
+            findViewById(R.id.dot_3),
+            findViewById(R.id.dot_4)
         )
 
         setupLanguageStep()
         setupThemeStep()
+        setupSystemTierStep()
         setupGlassStep()
 
         button.setOnClickListener {
@@ -55,7 +58,7 @@ class OnboardingActivity : AppCompatActivity() {
                 it.animate().scaleX(1f).scaleY(1f).setDuration(120).start()
             }.start()
 
-            if (flipper.displayedChild < 3) {
+            if (flipper.displayedChild < 4) {
                 flipper.showNext()
                 updatePage(flipper.displayedChild)
             } else {
@@ -116,6 +119,29 @@ class OnboardingActivity : AppCompatActivity() {
         refresh()
     }
 
+    private fun setupSystemTierStep() {
+        val optionWeak = findViewById<LinearLayout>(R.id.option_tier_weak)
+        val optionMedium = findViewById<LinearLayout>(R.id.option_tier_medium)
+        val optionStrong = findViewById<LinearLayout>(R.id.option_tier_strong)
+        val checkWeak = findViewById<ImageView>(R.id.check_tier_weak)
+        val checkMedium = findViewById<ImageView>(R.id.check_tier_medium)
+        val checkStrong = findViewById<ImageView>(R.id.check_tier_strong)
+
+        fun refresh() {
+            optionWeak.setBackgroundResource(if (selectedTier == AppPreferences.TIER_WEAK) R.drawable.bg_selectable_card_selected else R.drawable.bg_selectable_card)
+            optionMedium.setBackgroundResource(if (selectedTier == AppPreferences.TIER_MEDIUM) R.drawable.bg_selectable_card_selected else R.drawable.bg_selectable_card)
+            optionStrong.setBackgroundResource(if (selectedTier == AppPreferences.TIER_STRONG) R.drawable.bg_selectable_card_selected else R.drawable.bg_selectable_card)
+            checkWeak.visibility = if (selectedTier == AppPreferences.TIER_WEAK) View.VISIBLE else View.INVISIBLE
+            checkMedium.visibility = if (selectedTier == AppPreferences.TIER_MEDIUM) View.VISIBLE else View.INVISIBLE
+            checkStrong.visibility = if (selectedTier == AppPreferences.TIER_STRONG) View.VISIBLE else View.INVISIBLE
+        }
+
+        optionWeak.setOnClickListener { selectedTier = AppPreferences.TIER_WEAK; refresh(); bounce(checkWeak) }
+        optionMedium.setOnClickListener { selectedTier = AppPreferences.TIER_MEDIUM; refresh(); bounce(checkMedium) }
+        optionStrong.setOnClickListener { selectedTier = AppPreferences.TIER_STRONG; refresh(); bounce(checkStrong) }
+        refresh()
+    }
+
     private fun setupGlassStep() {
         val glassSwitch = findViewById<SwitchCompat>(R.id.onboard_glass_switch)
         val previewCard = findViewById<View>(R.id.glass_preview_card)
@@ -139,7 +165,7 @@ class OnboardingActivity : AppCompatActivity() {
             dot.layoutParams = params
             dot.setBackgroundResource(if (i == index) R.drawable.dot_active else R.drawable.dot_inactive)
         }
-        button.text = if (index == 3) getString(R.string.onboard_finish) else getString(R.string.onboard_next)
+        button.text = if (index == 4) getString(R.string.onboard_finish) else getString(R.string.onboard_next)
     }
 
     private fun dpToPx(dp: Int): Int =
@@ -148,6 +174,7 @@ class OnboardingActivity : AppCompatActivity() {
     private fun finishOnboarding() {
         AppPreferences.setLanguage(this, selectedLang)
         AppPreferences.setTheme(this, selectedTheme)
+        AppPreferences.setSystemTier(this, selectedTier)
         AppPreferences.setGlassEffect(this, glassEnabled)
         AppPreferences.setOnboardingDone(this)
 

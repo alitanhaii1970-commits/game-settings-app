@@ -47,5 +47,6 @@
     <string name="system_tier_weak">Weak</string>
     <string name="system_tier_medium">Medium</string>
     <string name="system_tier_strong">Strong</string>
-    <string name="recommended_for_you">✅ Recommended for your system</string>
+    <string name="onboard_tier_title">How powerful is your system (PC)?</string>
+    <string name="onboard_tier_subtitle">We\'ll use this to show which settings fit your PC best, for each game</string>
 </resources>

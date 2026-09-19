@@ -42,8 +42,6 @@ class GameDetailActivity : AppCompatActivity() {
         val yellowSection = findViewById<LinearLayout>(R.id.yellow_section)
         val greenText = findViewById<TextView>(R.id.detail_settings_green)
         val yellowText = findViewById<TextView>(R.id.detail_settings_yellow)
-        val greenBadge = findViewById<TextView>(R.id.green_recommended_badge)
-        val yellowBadge = findViewById<TextView>(R.id.yellow_recommended_badge)
         val watchButton = findViewById<Button>(R.id.watch_youtube_button)
 
         // ✅ اصلاح: دریافت فیلدهای Intent درست
@@ -136,21 +134,55 @@ class GameDetailActivity : AppCompatActivity() {
                 greenText.text = "برای این بازی هنوز تنظیماتی ثبت نشده."
             }
 
-            // نشان «توصیه‌شده برای سیستم شما» — فقط اگر کاربر قبلاً قدرت سیستمش رو
-            // در تنظیمات انتخاب کرده باشه، و فقط روی بخشی که واقعاً محتوا داره
+            // افکت درخشش روی بخشی که برای قدرت سیستمِ کاربر مناسب‌تره — فقط اگر
+            // کاربر قبلاً قدرت سیستمش رو در تنظیمات انتخاب کرده باشه، و فقط روی
+            // بخشی که واقعاً محتوا داره (سبز برای ضعیف/متوسط، زرد برای قوی)
             val systemTier = AppPreferences.getSystemTier(this)
             if (systemTier.isNotBlank()) {
                 val recommendGreen = systemTier != AppPreferences.TIER_STRONG
-                greenBadge.visibility =
-                    if (recommendGreen && greenSection.visibility == View.VISIBLE) View.VISIBLE else View.GONE
-                yellowBadge.visibility =
-                    if (!recommendGreen && yellowSection.visibility == View.VISIBLE) View.VISIBLE else View.GONE
+                if (recommendGreen && greenSection.visibility == View.VISIBLE) {
+                    applyGlow(greenText, R.drawable.bg_card_glow_green)
+                } else if (!recommendGreen && yellowSection.visibility == View.VISIBLE) {
+                    applyGlow(yellowText, R.drawable.bg_card_glow_yellow)
+                }
             }
         }
     }
 
+    /** حاشیه‌ی رنگی روشن + یک نفسِ ملایم و پیوسته (پالس ظریف مقیاس) برای جلب توجه بدون مزاحمت. */
+    private fun applyGlow(view: View, glowDrawableRes: Int) {
+        view.setBackgroundResource(glowDrawableRes)
+
+        val reduceMotion = android.provider.Settings.Global.getFloat(
+            contentResolver,
+            android.provider.Settings.Global.ANIMATOR_DURATION_SCALE,
+            1f
+        ) == 0f
+        if (reduceMotion) return
+
+        val pulse = android.animation.ValueAnimator.ofFloat(1f, 1.018f, 1f).apply {
+            duration = 1600
+            repeatCount = android.animation.ValueAnimator.INFINITE
+            interpolator = android.view.animation.AccelerateDecelerateInterpolator()
+            addUpdateListener {
+                val scale = it.animatedValue as Float
+                view.scaleX = scale
+                view.scaleY = scale
+            }
+        }
+        pulse.start()
+        glowAnimator = pulse
+    }
+
+    private var glowAnimator: android.animation.ValueAnimator? = null
+
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    override fun onDestroy() {
+        glowAnimator?.cancel()
+        super.onDestroy()
     }
 }
