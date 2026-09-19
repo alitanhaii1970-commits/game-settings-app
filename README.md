@@ -115,3 +115,4 @@ cd game-settings-app
 ساخته‌شده برای گیمرها ❤️
 
 </div>
+support in telegram:@Aloneix1
