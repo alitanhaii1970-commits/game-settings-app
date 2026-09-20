@@ -3,7 +3,6 @@ package com.gamesettings.app
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
@@ -99,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         searchBox.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                applyFilter(s?.toString().orEmpty(), animate = false)
+                applyFilter(s?.toString().orEmpty())
             }
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
@@ -139,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                 refreshButton.animate().alpha(1f).setDuration(200).start()
                 progressBar.visibility = View.GONE
                 allGames = games
-                applyFilter(searchBox.text?.toString().orEmpty(), animate = true)
+                applyFilter(searchBox.text?.toString().orEmpty())
                 if (forceServer) {
                     AppPreferences.markGamesLoaded(this)
                     Toast.makeText(this, "لیست به‌روز شد ✅", Toast.LENGTH_SHORT).show()
@@ -166,21 +165,14 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * فیلتر لیست بر اساس جستجو و نمایش نتیجه.
-     * انیمیشن ورود ردیفی فقط زمانی اجرا می‌شود که داده‌ی تازه‌ای لود شده باشد (animate=true)،
-     * نه به‌ازای هر ضربه کیبورد در جستجو — تا تایپ کردن نرم و بدون لرزش بماند.
      */
-    private fun applyFilter(query: String, animate: Boolean) {
+    private fun applyFilter(query: String) {
         val filtered = if (query.isBlank()) {
             allGames
         } else {
             allGames.filter { it.name.contains(query, ignoreCase = true) }
         }
         adapter.submitList(filtered)
-
-        if (animate) {
-            recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_games)
-            recyclerView.scheduleLayoutAnimation()
-        }
 
         emptyText.visibility = if (filtered.isEmpty() && allGames.isNotEmpty()) View.VISIBLE else View.GONE
         if (filtered.isEmpty() && allGames.isNotEmpty()) {
