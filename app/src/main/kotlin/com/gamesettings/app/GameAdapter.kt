@@ -1,7 +1,6 @@
 package com.gamesettings.app
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,9 +40,9 @@ class GameAdapter(
 
         fun bind(game: Game) {
             // مهم: هر انیمیشن نیمه‌کاره‌ی قبلی را لغو و شفافیت/اندازه/عمق کارت را کامل می‌کنیم.
-            // نکته‌ی حیاتی: translationZ هم باید ریست بشه — وگرنه اگه لمس یه کارت
-            // نیمه‌کاره بمونه (مثلاً وسط اسکرول سریع)، اون کارت با translationZ منفی
-            // باقی می‌مونه و در RecyclerView زیر کارت‌های مجاورش گیر می‌کنه (پنهان می‌شه)
+            // این ریست‌ها به‌عنوان محافظ باقی می‌مونن، حتی با این‌که دیگه خودمون انیمیشن
+            // سفارشی لمسی نمی‌سازیم — اگر یه‌جای دیگه‌ی کد (فعلی یا آینده) این مقادیر رو
+            // تغییر بده، این تضمین می‌کنه که کارت‌ها هیچ‌وقت با حالت نیمه‌کاره گیر نکنن.
             itemView.clearAnimation()
             itemView.animate().cancel()
             itemView.alpha = 1f
@@ -56,38 +55,21 @@ class GameAdapter(
             GlassStyler.applyCard(itemView.context, itemView)
             FontManager.applyToViewTree(itemView.context, itemView)
 
+            // رنگ متن رو صریحاً از نو تنظیم می‌کنیم (محافظ اضافی، حتی اگه از قبل درست باشه)
+            name.setTextColor(androidx.core.content.ContextCompat.getColor(itemView.context, R.color.text_primary))
             name.text = game.name
+
             image.load(game.imageUrl) {
                 crossfade(true)
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
             }
 
+            // فیدبک لمسی از طریق ریپل استاندارد خودِ اندروید (که در XML تعریف شده) —
+            // عمداً دیگه انیمیشن سفارشی scale/translationZ نمی‌سازیم، چون منبع
+            // یک باگ تکرارشونده بود (اگه لمس وسط ناوبری/اسکرول قطع می‌شد، مقدار
+            // نیمه‌کاره می‌موند). ریپل native هیچ‌وقت این‌طوری گیر نمی‌کنه.
             itemView.setOnClickListener { onClick(game) }
-
-            // انیمیشن فشرده‌شدن کارت هنگام لمس — کمی مقیاس کوچک‌تر + کاهش برجستگی هنگام فشار،
-            // و برگشت با overshoot ملایم (حس فنری و premium) هنگام رهاسازی
-            itemView.setOnTouchListener { view, event ->
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        view.animate()
-                            .scaleX(0.96f).scaleY(0.96f)
-                            .translationZ(-2f)
-                            .setDuration(110)
-                            .setInterpolator(android.view.animation.DecelerateInterpolator())
-                            .start()
-                    }
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        view.animate()
-                            .scaleX(1f).scaleY(1f)
-                            .translationZ(0f)
-                            .setDuration(220)
-                            .setInterpolator(android.view.animation.OvershootInterpolator(1.8f))
-                            .start()
-                    }
-                }
-                false
-            }
         }
     }
 }
