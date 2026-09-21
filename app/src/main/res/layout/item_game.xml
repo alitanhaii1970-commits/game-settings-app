@@ -10,7 +10,7 @@
     android:padding="12dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="@drawable/ripple_game_card">
 
     <ImageView
         android:id="@+id/game_image"
