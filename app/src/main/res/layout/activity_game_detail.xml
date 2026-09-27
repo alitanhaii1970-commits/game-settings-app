@@ -46,22 +46,16 @@
                     android:layout_gravity="bottom|end"
                     android:layout_margin="10dp"
                     android:padding="6dp"
-                    android:background="@drawable/bg_round_button_glass"
+                    android:background="@drawable/bg_round_button"
                     android:src="@drawable/ic_expand"
                     android:contentDescription="بزرگ‌نمایی عکس"
                     app:tint="@color/white" />
 
             </FrameLayout>
 
-            <!-- لایه‌ی حباب‌های شیشه‌ای پشت بخش‌های تنظیمات + خود بخش‌ها روی هم -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <com.gamesettings.app.GlassBubblesView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="24dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

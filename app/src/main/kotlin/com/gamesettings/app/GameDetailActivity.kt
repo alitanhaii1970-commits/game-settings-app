@@ -18,7 +18,6 @@ class GameDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
-        AppPreferences.applyTheme(AppPreferences.getTheme(this))
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
@@ -30,7 +29,7 @@ class GameDetailActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.detail_toolbar)
         setSupportActionBar(toolbar)
-        // آیکون برگشت رنگ ثابت داشت که توی تم روشن دیده نمی‌شد؛ الان با رنگ متن اصلی هماهنگ می‌شه
+        // آیکون برگشت با رنگ متن اصلی هماهنگ می‌شه
         toolbar.navigationIcon?.setTint(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }

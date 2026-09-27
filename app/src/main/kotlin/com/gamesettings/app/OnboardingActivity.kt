@@ -10,13 +10,11 @@ import android.widget.LinearLayout
 import android.widget.ViewFlipper
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
 
 /**
  * صفحه‌ی ورود اولیه که فقط یک‌بار (پیش از باز شدن صفحه‌ی اصلی) نشان داده می‌شود:
- * خوش‌آمدگویی → انتخاب زبان → انتخاب تم → حالت شیشه‌ای → شروع.
- * تغییرات واقعی (زبان/تم) فقط در انتهای مسیر اعمال می‌شوند تا میانه‌ی کار، صفحه دوباره‌ساز نشود.
+ * خوش‌آمدگویی → انتخاب زبان → قدرت سیستم → شروع.
+ * تغییرات واقعی (زبان) فقط در انتهای مسیر اعمال می‌شوند تا میانه‌ی کار، صفحه دوباره‌ساز نشود.
  */
 class OnboardingActivity : AppCompatActivity() {
 
@@ -25,16 +23,9 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var dots: List<View>
 
     private var selectedLang: String = AppPreferences.LANG_FA
-    private var selectedTheme: String = AppPreferences.THEME_DARK
     private var selectedTier: String = AppPreferences.TIER_MEDIUM
-    private var glassEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // ظاهر خود ویزارد همیشه تیره است (صرف‌نظر از تنظیم سیستم)، چون گزینه‌ی
-        // «تیره» به‌طور پیش‌فرض در مرحله‌ی تم به‌عنوان انتخاب‌شده نشان داده می‌شود.
-        // انتخاب نهایی کاربر در finishOnboarding() به‌درستی جایگزین این حالت می‌شود.
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
@@ -43,22 +34,18 @@ class OnboardingActivity : AppCompatActivity() {
         dots = listOf(
             findViewById(R.id.dot_0),
             findViewById(R.id.dot_1),
-            findViewById(R.id.dot_2),
-            findViewById(R.id.dot_3),
-            findViewById(R.id.dot_4)
+            findViewById(R.id.dot_2)
         )
 
         setupLanguageStep()
-        setupThemeStep()
         setupSystemTierStep()
-        setupGlassStep()
 
         button.setOnClickListener {
             it.animate().scaleX(0.96f).scaleY(0.96f).setDuration(80).withEndAction {
                 it.animate().scaleX(1f).scaleY(1f).setDuration(120).start()
             }.start()
 
-            if (flipper.displayedChild < 4) {
+            if (flipper.displayedChild < 2) {
                 flipper.showNext()
                 updatePage(flipper.displayedChild)
             } else {
@@ -100,25 +87,6 @@ class OnboardingActivity : AppCompatActivity() {
         refresh()
     }
 
-    private fun setupThemeStep() {
-        val optionDark = findViewById<LinearLayout>(R.id.option_theme_dark)
-        val optionLight = findViewById<LinearLayout>(R.id.option_theme_light)
-        val checkDark = findViewById<ImageView>(R.id.check_theme_dark)
-        val checkLight = findViewById<ImageView>(R.id.check_theme_light)
-
-        fun refresh() {
-            val isDark = selectedTheme == AppPreferences.THEME_DARK
-            optionDark.setBackgroundResource(if (isDark) R.drawable.bg_selectable_card_selected else R.drawable.bg_selectable_card)
-            optionLight.setBackgroundResource(if (!isDark) R.drawable.bg_selectable_card_selected else R.drawable.bg_selectable_card)
-            checkDark.visibility = if (isDark) View.VISIBLE else View.INVISIBLE
-            checkLight.visibility = if (!isDark) View.VISIBLE else View.INVISIBLE
-        }
-
-        optionDark.setOnClickListener { selectedTheme = AppPreferences.THEME_DARK; refresh(); bounce(checkDark) }
-        optionLight.setOnClickListener { selectedTheme = AppPreferences.THEME_LIGHT; refresh(); bounce(checkLight) }
-        refresh()
-    }
-
     private fun setupSystemTierStep() {
         val optionWeak = findViewById<LinearLayout>(R.id.option_tier_weak)
         val optionMedium = findViewById<LinearLayout>(R.id.option_tier_medium)
@@ -142,16 +110,6 @@ class OnboardingActivity : AppCompatActivity() {
         refresh()
     }
 
-    private fun setupGlassStep() {
-        val glassSwitch = findViewById<SwitchCompat>(R.id.onboard_glass_switch)
-        val previewCard = findViewById<View>(R.id.glass_preview_card)
-
-        glassSwitch.setOnCheckedChangeListener { _, isChecked ->
-            glassEnabled = isChecked
-            previewCard.setBackgroundResource(if (isChecked) R.drawable.bg_card_glass else R.drawable.bg_card)
-        }
-    }
-
     private fun bounce(view: View) {
         view.scaleX = 0.4f
         view.scaleY = 0.4f
@@ -165,7 +123,7 @@ class OnboardingActivity : AppCompatActivity() {
             dot.layoutParams = params
             dot.setBackgroundResource(if (i == index) R.drawable.dot_active else R.drawable.dot_inactive)
         }
-        button.text = if (index == 4) getString(R.string.onboard_finish) else getString(R.string.onboard_next)
+        button.text = if (index == 2) getString(R.string.onboard_finish) else getString(R.string.onboard_next)
     }
 
     private fun dpToPx(dp: Int): Int =
@@ -173,9 +131,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun finishOnboarding() {
         AppPreferences.setLanguage(this, selectedLang)
-        AppPreferences.setTheme(this, selectedTheme)
         AppPreferences.setSystemTier(this, selectedTier)
-        AppPreferences.setGlassEffect(this, glassEnabled)
         AppPreferences.setOnboardingDone(this)
 
         startActivity(Intent(this, MainActivity::class.java))

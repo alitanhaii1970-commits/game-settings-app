@@ -50,9 +50,8 @@ class GameAdapter(
             itemView.scaleY = 1f
             itemView.translationZ = 0f
 
-            // ظاهر شیشه‌ای و فونت کارت — هر بار bind می‌شه دوباره چک می‌شن، پس اگر کاربر
-            // این تنظیمات را در صفحه‌ی تنظیمات عوض کرده باشد، بلافاصله (حتی موقع اسکرول) اعمال می‌شود
-            GlassStyler.applyCard(itemView.context, itemView)
+            // فونت کارت — هر بار bind می‌شه دوباره چک می‌شه، پس اگر کاربر
+            // این تنظیم را در صفحه‌ی تنظیمات عوض کرده باشد، بلافاصله (حتی موقع اسکرول) اعمال می‌شود
             FontManager.applyToViewTree(itemView.context, itemView)
 
             // رنگ متن رو صریحاً از نو تنظیم می‌کنیم (محافظ اضافی، حتی اگه از قبل درست باشه)

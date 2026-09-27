@@ -6,15 +6,14 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 
 /**
- * ذخیره و بازیابی تنظیمات کاربر: زبان برنامه و تم (تیره/روشن/سیستم).
+ * ذخیره و بازیابی تنظیمات کاربر: زبان برنامه، فونت و قدرت سیستم.
  * از SharedPreferences استفاده می‌کند تا انتخاب کاربر بین بازکردن‌های مختلف اپ باقی بماند.
+ * (تم برنامه همیشه تیره است — تم روشن به‌طور کامل حذف شده.)
  */
 object AppPreferences {
 
     private const val PREFS_NAME = "app_prefs"
     private const val KEY_LANGUAGE = "language"
-    private const val KEY_THEME = "theme"
-    private const val KEY_GLASS = "glass_effect"
     private const val KEY_ONBOARDING_DONE = "onboarding_done"
     private const val KEY_FONT = "app_font"
     private const val KEY_SYSTEM_TIER = "system_tier"
@@ -22,10 +21,6 @@ object AppPreferences {
 
     const val LANG_FA = "fa"
     const val LANG_EN = "en"
-
-    const val THEME_DARK = "dark"
-    const val THEME_LIGHT = "light"
-    const val THEME_SYSTEM = "system"
 
     const val TIER_WEAK = "weak"
     const val TIER_MEDIUM = "medium"
@@ -47,32 +42,7 @@ object AppPreferences {
         AppCompatDelegate.setApplicationLocales(locales)
     }
 
-    fun getTheme(context: Context): String =
-        prefs(context).getString(KEY_THEME, THEME_DARK) ?: THEME_DARK
-
-    fun setTheme(context: Context, theme: String) {
-        prefs(context).edit().putString(KEY_THEME, theme).apply()
-        applyTheme(theme)
-    }
-
-    fun applyTheme(theme: String) {
-        val mode = when (theme) {
-            THEME_LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-            THEME_DARK -> AppCompatDelegate.MODE_NIGHT_YES
-            else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        }
-        AppCompatDelegate.setDefaultNightMode(mode)
-    }
-
-    /** حالت شیشه‌ای (glassmorphism) — یک لایه‌ی ظاهری اضافه، مستقل از تیره/روشن بودن تم. */
-    fun getGlassEffect(context: Context): Boolean =
-        prefs(context).getBoolean(KEY_GLASS, false)
-
-    fun setGlassEffect(context: Context, enabled: Boolean) {
-        prefs(context).edit().putBoolean(KEY_GLASS, enabled).apply()
-    }
-
-    /** آیا کاربر مراحل ورود اولیه (زبان → تم → شیشه‌ای) را قبلاً طی کرده؟ */
+    /** آیا کاربر مراحل ورود اولیه (زبان → قدرت سیستم) را قبلاً طی کرده؟ */
     fun isOnboardingDone(context: Context): Boolean =
         prefs(context).getBoolean(KEY_ONBOARDING_DONE, false)
 

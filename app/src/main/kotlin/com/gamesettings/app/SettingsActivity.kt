@@ -2,18 +2,15 @@ package com.gamesettings.app
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
+import android.widget.ImageButton
 
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
-        AppPreferences.applyTheme(AppPreferences.getTheme(this))
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -21,21 +18,8 @@ class SettingsActivity : AppCompatActivity() {
         val rootView = findViewById<View>(android.R.id.content)
         val backButton: ImageButton = findViewById(R.id.back_button)
         val languageGroup: RadioGroup = findViewById(R.id.language_group)
-        val themeGroup: RadioGroup = findViewById(R.id.theme_group)
         val systemTierGroup: RadioGroup = findViewById(R.id.system_tier_group)
         val fontGroup: RadioGroup = findViewById(R.id.font_group)
-        val glassSwitch: SwitchCompat = findViewById(R.id.glass_switch)
-        val languageCard: LinearLayout = findViewById(R.id.language_card)
-        val themeCard: LinearLayout = findViewById(R.id.theme_card)
-        val systemTierCard: LinearLayout = findViewById(R.id.system_tier_card)
-        val glassCard: LinearLayout = findViewById(R.id.glass_card)
-
-        // ظاهر شیشه‌ای روی کارت‌های همین صفحه (در صورت فعال بودن)؛
-        // کارت فونت همیشه استایل زرد-شیشه‌ای مخصوص خودش را دارد (در XML ست شده)
-        GlassStyler.applyCard(this, languageCard)
-        GlassStyler.applyCard(this, themeCard)
-        GlassStyler.applyCard(this, systemTierCard)
-        GlassStyler.applyCard(this, glassCard)
 
         // فونت انتخابی فعلی را روی همین صفحه هم اعمال کن
         FontManager.applyToViewTree(this, rootView)
@@ -50,18 +34,12 @@ class SettingsActivity : AppCompatActivity() {
             AppPreferences.LANG_EN -> languageGroup.check(R.id.lang_en)
             else -> languageGroup.check(R.id.lang_fa)
         }
-        when (AppPreferences.getTheme(this)) {
-            AppPreferences.THEME_LIGHT -> themeGroup.check(R.id.theme_light)
-            AppPreferences.THEME_SYSTEM -> themeGroup.check(R.id.theme_system)
-            else -> themeGroup.check(R.id.theme_dark)
-        }
         when (AppPreferences.getSystemTier(this)) {
             AppPreferences.TIER_MEDIUM -> systemTierGroup.check(R.id.tier_medium)
             AppPreferences.TIER_STRONG -> systemTierGroup.check(R.id.tier_strong)
             AppPreferences.TIER_WEAK -> systemTierGroup.check(R.id.tier_weak)
             else -> systemTierGroup.clearCheck() // هنوز انتخاب نکرده — هیچ‌کدام تیک نخورده
         }
-        glassSwitch.isChecked = AppPreferences.getGlassEffect(this)
 
         // ساخت پویا‌ی ردیف‌های انتخاب فونت
         buildFontOptions(fontGroup)
@@ -81,15 +59,6 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        themeGroup.setOnCheckedChangeListener { _, checkedId ->
-            val theme = when (checkedId) {
-                R.id.theme_light -> AppPreferences.THEME_LIGHT
-                R.id.theme_system -> AppPreferences.THEME_SYSTEM
-                else -> AppPreferences.THEME_DARK
-            }
-            AppPreferences.setTheme(this, theme)
-        }
-
         systemTierGroup.setOnCheckedChangeListener { _, checkedId ->
             val tier = when (checkedId) {
                 R.id.tier_medium -> AppPreferences.TIER_MEDIUM
@@ -104,13 +73,6 @@ class SettingsActivity : AppCompatActivity() {
             val fontId = selected?.tag as? String ?: FontManager.SYSTEM_DEFAULT
             AppPreferences.setFontId(this, fontId)
             FontManager.applyToViewTree(this, rootView)
-        }
-
-        glassSwitch.setOnCheckedChangeListener { _, isChecked ->
-            AppPreferences.setGlassEffect(this, isChecked)
-            GlassStyler.applyCard(this, languageCard)
-            GlassStyler.applyCard(this, themeCard)
-            GlassStyler.applyCard(this, glassCard)
         }
 
         // ==================== بررسی و دانلود خودکار آپدیت ====================

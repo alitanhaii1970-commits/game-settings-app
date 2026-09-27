@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // بار اول: هدایت به مسیر ورود اولیه (زبان → تم → شیشه‌ای) پیش از نمایش لیست بازی‌ها
+        // بار اول: هدایت به مسیر ورود اولیه (زبان → قدرت سیستم) پیش از نمایش لیست بازی‌ها
         if (!AppPreferences.isOnboardingDone(this)) {
             super.onCreate(savedInstanceState)
             startActivity(Intent(this, OnboardingActivity::class.java))
@@ -35,9 +35,8 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // اعمال زبان و تم ذخیره‌شده کاربر پیش از رسم صفحه
+        // اعمال زبان ذخیره‌شده کاربر پیش از رسم صفحه
         AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
-        AppPreferences.applyTheme(AppPreferences.getTheme(this))
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -54,11 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         // فونت انتخابی کاربر را روی کل صفحه اعمال کن
         FontManager.applyToViewTree(this, rootView)
-
-        // ظاهر شیشه‌ای (در صورت فعال بودن) روی عناصر کارت‌مانند
-        GlassStyler.applySearchBox(this, searchBox)
-        GlassStyler.applyRoundButton(this, refreshButton)
-        GlassStyler.applyRoundButton(this, settingsButton)
 
         // انیمیشن ورود ملایم کل صفحه هنگام باز شدن
         rootView.alpha = 0f
@@ -114,11 +108,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // اگر کاربر از صفحه تنظیمات برگشته و حالت شیشه‌ای/تم/فونت را عوض کرده، ظاهر لیست را به‌روز کن
+        // اگر کاربر از صفحه تنظیمات برگشته و فونت را عوض کرده، ظاهر لیست را به‌روز کن
         FontManager.applyToViewTree(this, findViewById(android.R.id.content))
-        GlassStyler.applySearchBox(this, searchBox)
-        GlassStyler.applyRoundButton(this, refreshButton)
-        GlassStyler.applyRoundButton(this, settingsButton)
         if (::adapter.isInitialized) {
             adapter.notifyDataSetChanged()
         }

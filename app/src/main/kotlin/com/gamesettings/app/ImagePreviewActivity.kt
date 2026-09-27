@@ -14,7 +14,6 @@ class ImagePreviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppPreferences.applyLanguage(AppPreferences.getLanguage(this))
-        AppPreferences.applyTheme(AppPreferences.getTheme(this))
 
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.fade_scale_in, 0)
